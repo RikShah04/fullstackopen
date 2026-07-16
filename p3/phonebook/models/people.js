@@ -13,10 +13,25 @@ mongoose.connect(url, {family: 4})
         console.log('error connecting to MongoDB:', error.message)
     })
 
+function validator (val) {
+    var pattern = /^\d{2,3}-\d+$/
+    return pattern.test(val)
+}
+
 const phonebookSchema = new mongoose.Schema({
-    name: String,
-    number: String
+    name: {
+        type: String,
+        required: true
+
+    },
+    number: {
+        type: String,
+        minLength: 8,
+        validate: [validator, 'make sure phone number is a real phone number'],
+        required: true
+    }
 })
+  
 
 phonebookSchema.set('toJSON', {
     transform: (document, returnedObject) => {

@@ -53,6 +53,10 @@ const App = () => {
         setLastAction("added " + temp.name)
         setTimeout(() => setLastAction(''), 3000)
       })
+      .catch( error => {
+          setLastAction(`make sure the phone number is valid`)
+          setTimeout(() => setLastAction(''), 3000)
+        })
     }
   }
 
